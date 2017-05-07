@@ -1,0 +1,43 @@
+<html>
+    <head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>        
+        <!-- Datatable Files, this is the core table API used for invoice Items -->
+        <!-- Datatable core -->
+       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-2.2.4/dt-1.10.15/b-1.3.1/r-2.1.1/se-1.2.2/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/jq-2.2.4/dt-1.10.15/b-1.3.1/r-2.1.1/se-1.2.2/datatables.min.js"></script>
+<script type="text/javascript" src="Editor/js/dataTables.editor.js"></script>
+    <script type="text/javascript" src="js/master.js"></script>
+    </head>
+    <body>
+
+        <div id="LetterHead">
+            <!-- Using this section for letter head style, helpfull for printable pages -->
+        </div>
+        <div id="InvoiceHeader">
+            <!-- using this for invoice header details. like customer name
+            address
+            tax details etc
+            -->
+        </div>
+        <div id="InvoiceDetails">
+            <!-- Area for main table used for invoice ITEM -->
+            <table id="invoiceTable"  class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead> <tr>
+                <th>First Name</th>
+                <th>Last name</th>
+                
+            </tr></thead>
+            </table>
+        </div>
+        <div id="InvoiceFooter">
+            <!-- Using this area for the Invoice Footer, details like sum, calculated tax etc -->
+        </div>
+        <div id="LetterFooter">
+            <!-- Use this area for the letter footer. Company address etc -->
+        </div>
+    </body>
+</html>
