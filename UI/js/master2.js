@@ -14,7 +14,8 @@ $(document).ready( function () {
         'Amount',
         'Units'
         
-    ]
+    ],
+    colWidths: [400,80,80,100,80]
 };
     var hot = new Handsontable(container,settings);
 });

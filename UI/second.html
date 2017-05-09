@@ -6,9 +6,80 @@
     <script src="handsontable-0.31.2/dist/handsontable.full.js"></script>
 <link rel="stylesheet" media="screen" href="handsontable-0.31.2/dist/handsontable.full.css">
  <script src="js/master2.js"></script>
+ <link rel="stylesheet" media="screen" href="css/invoice.css">
 </head>
 <body>
-<div id="invoiceTable">
-</div>
-
+   <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                            </td>
+                            
+                            <td>
+                                Invoice #: 123<br>
+                                Created: January 1, 2015<br>
+                                Due: February 1, 2015
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Next Step Webs, Inc.<br>
+                                12345 Sunny Road<br>
+                                Sunnyville, TX 12345
+                            </td>
+                            
+                            <td>
+                                Acme Corp.<br>
+                                John Doe<br>
+                                john@example.com
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="heading">
+                <td>
+                    Payment Method
+                </td>
+                
+                <td>
+                    Check #
+                </td>
+            </tr>
+            
+            <tr class="details">
+                <td>
+                    Check
+                </td>
+                
+                <td>
+                    1000
+                </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div id="invoiceTable">
+                </div>
+              </td>
+            <tr class="total">
+                <td></td>
+                
+                <td>
+                   Total: $385.00
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
