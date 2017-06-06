@@ -1,0 +1,11 @@
+folder=ion-folder
+doc=ion-document-text
+
+font awesome
+-->pdf= fa-file-pdf-o
+-->txt= fa-file-text
+-->zip= fa-file-archive-o
+->doc= fa-file-word-o
+-->xls =  fa-file-excel-o
+-->ppt= fa-file-powerpoint-o
+

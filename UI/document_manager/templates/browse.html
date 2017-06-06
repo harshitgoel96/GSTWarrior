@@ -1,0 +1,37 @@
+<ion-view view-title="Browse">
+
+</ion-nav-buttons>
+<ion-nav-buttons side="right">
+      <button class="button button-icon icon ion-ios-minus-outline" ng-click="toggleDelete()">
+	  </button>
+	 </ion-nav-buttons>
+  
+	<ion-tabs class="tabs-subtle tabs-top tabs-striped tabs-color-positive  tabs-icon-left has-header">
+	<ion-tab title="My DropBox" icon="fa fa-dropbox" on-select="getPathContent()" >
+	<ion-content class="correct-tabs-top">
+  <ion-list  show-delete="shouldShowDelete " >
+		<ion-item ng-repeat="content in contents" class="item-icon-left item-icon-right" ng-click="getPathContent(content)">
+			
+			<i ng-class="getIconClass(content)" class="icon fa " ></i>
+			
+			
+			 <h2 style="height:22px !important">{{content.document_name}}</h2>
+			 
+			 <p ng-if="content.document_type!='d'">{{content.size}}</p>
+			 <p ng-if="content.document_type=='d'">Folder</p>
+			 
+			 <ion-delete-button class="ion-minus-circled" ng-if="content.is_dir!=true" ng-click="doDelete(content)">
+				</ion-delete-button>
+			 <!--
+				<i class=" icon ion-ios-cloud-download" ng-if="content.is_dir!=true && !shouldShowDelete" ng-click="alerter('start download')"></i>
+				<i class="icon ion-chevron-right" ng-if="content.is_dir && !shouldShowDelete" ng-click="alerter('enter dir')"></i>
+				-->
+		</ion-item>
+	</ion-list>
+	</ion-content>
+	</ion-tab>
+	<ion-tab title="Shared Folders" icon="fa fa-slideshare">
+	</ion-tab>
+	</ion-tabs>
+  
+</ion-view>
