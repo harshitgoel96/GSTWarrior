@@ -1,0 +1,12 @@
+create table directory_nodes (
+    path varchar primary key,
+    display_name varchar
+	/* your other attributes here, can be null */
+);
+create table directory_parents_children (
+    parent_path varchar,
+    child_path varchar,
+    primary key(parent_path,child_path),
+    foreign key (parent_path) references directory_nodes (path),
+    foreign key (child_path) references directory_nodes (path)
+);
