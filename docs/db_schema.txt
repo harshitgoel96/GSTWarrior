@@ -7,7 +7,7 @@ CREATE TABLE `node_keeper` (
   `parent_id` int(11) DEFAULT NULL,
   `docType` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 ==============================================================
 
@@ -17,6 +17,9 @@ CREATE TABLE `closure` (
   `child_id` int(11) DEFAULT NULL,
   `depth` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
 
 =============================================================
+
+insert into node_keeper(display_name,parent_id,path) values ('root',0,'root');
+insert into closure(parent_id,child_id,depth) values (1,1,0);
