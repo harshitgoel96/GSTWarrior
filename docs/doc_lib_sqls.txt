@@ -1,12 +1,68 @@
 create table directory_nodes (
-    path varchar primary key,
-    display_name varchar
+    path varchar(700) primary key,
+    display_name varchar(255)
 	/* your other attributes here, can be null */
 );
 create table directory_parents_children (
-    parent_path varchar,
-    child_path varchar,
+    parent_path varchar(700),
+    child_path varchar(700),
     primary key(parent_path,child_path),
     foreign key (parent_path) references directory_nodes (path),
     foreign key (child_path) references directory_nodes (path)
 );
+
+
+insert into directory_nodes values('/','/');
+
+insert into directory_parents_children values('/','/');
+
+
+insert into directory_nodes values('/a/b/','b/');
+
+insert into directory_parents_children 
+select  parent_path,'/a/b/' from directory_parents_children where child_path='/a/'
+union all select '/a/b/','/a/b/';
+
+
+
+MariaDB [doclib]> select * from directory_nodes  nodes join directory_parents_children on nodes.path=child_path where parent_path='/';
+
+
+
+
+select group_concat(n.display_name order by n.path separator )
+as path
+from directory_parents_children d
+join directory_parents_children a on (a.child_path=d.child_path)
+join directory_nodes n on (n.path=a.parent_path)
+where d.parent_path='/' and d.child_path!=d.parent_path
+group by d.child_path;
+
+==========================================
+create table node_keeper( id integer auto_increment primary key,path varchar(700),display_name varchar(255),parent_id integer)
+
+insert into node_keeper(display_name,parent_id) values(<<folder name>>,<<parent id>>);
+
+
+Well, to make PARENT_ITEM a parent of CHILD_ITEM, the code looks like this:
+
+insert into closure(parent_id, child_id, depth)
+select p.parent_id, c.child_id, p.depth+c.depth+1
+  from closure p, closure c
+ where p.child_id=<<parent id>> and c.parent_id=<<child id>>;
+
+
+
+===========================================
+select * from node_keeper n join closure c on n.id=c.child_id where c.parent_id=2;
+
+
+==================================================
+
+SELECT d.*, p.parent_id AS '_parent'
+FROM node_keeper AS a
+JOIN closure AS c ON (c.parent_id = a.id)
+JOIN node_keeper  AS d ON (c.child_id = d.id)
+LEFT OUTER JOIN closure AS p ON (p.child_id = d.id AND p.depth = 1)
+WHERE a.id = 1 AND c.depth <= 1
+ORDER BY c.depth;

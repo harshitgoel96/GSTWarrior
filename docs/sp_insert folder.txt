@@ -1,0 +1,15 @@
+DELIMITER //
+CREATE PROCEDURE insert_folder (IN in_display_name varchar(255),IN in_parent_id int(11))
+
+BEGIN
+declare in_child int(11);
+    insert into node_keeper (display_name,parent_id) values (in_display_name ,in_parent_id);
+	SELECT LAST_INSERT_ID() into in_child;
+	insert into closure(parent_id, child_id, depth) values (in_child,in_child,0);
+	insert into closure(parent_id, child_id, depth)
+	select p.parent_id, c.child_id, p.depth+c.depth+1
+  from closure p, closure c
+ where p.child_id=in_parent_id and c.parent_id=in_child;
+ 
+END //
+//DELIMITER;

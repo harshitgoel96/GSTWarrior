@@ -1,0 +1,54 @@
+<head>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+  <script src="js/treeRender.js"> </script>
+  <link rel="stylesheet" href="css/gst-styles.css" />
+</head>
+<body>
+<div >
+<div class="row">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="AddFolderModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Folder</h4>
+      </div>
+      <div class="modal-body form-group">
+	  <form id="folderForm">
+       <input type="text" placeholder="Enter Folder Name" class="form-control" id="folderNameInput" maxlength="200"  pattern="[^\\/:\x22*?<>|]+" required>
+      </form>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary submit-folder-request" disabled="true" maxlength="200">Add Folder</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='col-md-4'>
+<div id="treePlace" ></div>
+</div>
+<div id="navigationPlace" class='col-md-8'>
+<div class="row well" style="padding:5px;margin-bottom:0px">
+<div class="col-md-8" style="padding:7px;">
+<span class="glyphicon glyphicon-home" style="color:blue">&nbsp;</span><span id='pathPlace'>/root</span></div>
+<div class="col-md-4 add-button-grp" role="group">
+		<button type="button" class="btn btn-primary add-folder-button"  data-toggle="modal" data-target="#AddFolderModal"><i class="glyphicon glyphicon-folder-close"></i>&nbsp;Add Folder</button>
+		<button type="button" class="btn btn-primary add-file-button"><i class="glyphicon glyphicon-upload"></i>&nbsp;Add File</button>
+</div>
+</div>
+<div class="row " id="listPlace">
+	
+	<ul id="directoryContent" style="list-style-type: none;padding: 0;margin: 0" class="jstree-default-large"></ul>
+</div>
+</div>
+</div>
+</div>
+</body>
