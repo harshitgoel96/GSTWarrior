@@ -33,7 +33,9 @@ LEFT OUTER JOIN closure AS p ON (p.child_id = d.id AND p.depth = 1)
 WHERE a.id = 1 
 ORDER BY c.depth;
 */
-$result=mysqli_query($link,"SELECT d.id as id,d.parent_id as parent, d.display_name as text , p.parent_id AS '_parent' FROM node_keeper AS a JOIN closure AS c ON (c.parent_id = a.id) JOIN node_keeper  AS d ON (c.child_id = d.id) LEFT OUTER JOIN closure AS p ON (p.child_id = d.id AND p.depth = 1) WHERE a.id = 1  AND c.depth <= 4  ORDER BY c.depth;");
+$result=mysqli_query($link," SELECT d.id as id,d.parent_id as parent, d.display_name as text , p.parent_id AS '_parent' FROM node_keeper AS a JOIN closure AS c ON (c.parent_id = a.id) JOIN node_keeper  AS d ON (c.child_id = d.id) LEFT OUTER JOIN closure AS p ON (p.child_id = d.id AND p.depth = 1) WHERE a.id = 1  and d.docType='Folder'  ORDER BY c.depth;");
+
+//"SELECT d.id as id,d.parent_id as parent, d.display_name as text , p.parent_id AS '_parent' FROM node_keeper AS a JOIN closure AS c ON (c.parent_id = a.id) JOIN node_keeper  AS d ON (c.child_id = d.id) LEFT OUTER JOIN closure AS p ON (p.child_id = d.id AND p.depth = 1) WHERE a.id = 1  AND c.depth <= 4  ORDER BY c.depth;");
 /*
 SELECT d.*, p.parent_id AS '_parent' FROM node_keeper AS a JOIN closure AS c ON (c.parent_id = a.id) JOIN node_keeper  AS d ON (c.child_id = d.id) LEFT OUTER JOIN closure AS p ON (p.child_id = d.id AND p.depth = 1) WHERE a.id = 1  AND c.depth <= 4  ORDER BY d.id;
 

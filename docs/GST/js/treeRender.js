@@ -31,11 +31,12 @@ $(document).ready(function(){
 	
 	$('#treePlace').on('ready.jstree',function(event,data){
 		console.log('node ready event');
-		getContentForDoc(1);
 		window.tree_Ready=true;
 		if(window.shouldExpandTree)
 		{
-		//	expandNode(window.expandTreeId);
+			getContentForDoc(window.expandTreeId);
+		
+			expandNode(window.expandTreeId);
 		}
 	});
 	
@@ -80,6 +81,7 @@ $(document).ready(function(){
 			}
 			$('.add-button-grp').data('parent-id',dataObj.parent);
 			$('.add-button-grp').data('current-folder-id',docId);
+			$('#pathPlace').text(dataObj.path);
 			//var selector="#\\"+docId.toString().charCodeAt(0).toString(16);
 			//console.log("tried opening "+selector);
 			//$("#treePlace").jstree("open_node", $(selector));
@@ -98,18 +100,10 @@ $(document).ready(function(){
 	$('.submit-folder-request').click(function(){
 		addFolder($('#folderNameInput').val());
 	});
-	/*function expandNode(nodeID) {
+	function expandNode(nodeID) {
     // Expand all nodes up to the root (the id of the root returns as '#')
 	
-	
-    while (nodeID != '#') {
-        // Open this node
-        $("#treePlace").jstree("open_node", nodeID)
-        // Get the jstree object for this node
-			var thisNode = $("#treePlace").jstree("get_node", nodeID);
-        // Get the id of the parent of this node
-			nodeID = $("#treePlace").jstree("get_parent", thisNode);
-		}
-	}*/
+
+	}
 	loadFolderTree(1);
 });

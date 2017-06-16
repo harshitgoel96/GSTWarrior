@@ -30,13 +30,15 @@ MariaDB [doclib]> select * from directory_nodes  nodes join directory_parents_ch
 
 
 
-select group_concat(n.display_name order by n.path separator )
+select d.child_id, group_concat(n.display_name order by n.id separator '/')
 as path
-from directory_parents_children d
-join directory_parents_children a on (a.child_path=d.child_path)
-join directory_nodes n on (n.path=a.parent_path)
-where d.parent_path='/' and d.child_path!=d.parent_path
-group by d.child_path;
+from closure d
+join closure a on (a.child_id=d.child_id)
+join node_keeper n on (n.id=a.parent_id)
+where d.parent_id=1 and d.child_id!=d.parent_id and d.child_id=<<in child id>>
+group by d.child_id;
+
+
 
 ==========================================
 create table node_keeper( id integer auto_increment primary key,path varchar(700),display_name varchar(255),parent_id integer)

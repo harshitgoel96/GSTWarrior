@@ -20,7 +20,7 @@ while($row=mysqli_fetch_assoc($result)){
 $data[]=$row;
 }
 
-$result=mysqli_query($link,"select n.parent_id  from node_keeper n where n.id=".$_REQUEST['docId']);
+$result=mysqli_query($link,"select n.parent_id, n.path  from node_keeper n where n.id=".$_REQUEST['docId']);
 
 if(!$result)
 {
@@ -32,6 +32,7 @@ $value = mysqli_fetch_object($result);
 
 $obj['folderContent']=$data;
 $obj['parent']=$value->parent_id;
+$obj['path']=$value->path;
 
 echo json_encode($obj);
 

@@ -1,0 +1,22 @@
+==============================================================
+
+CREATE TABLE `node_keeper` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `path` varchar(700) DEFAULT NULL,
+  `display_name` varchar(255) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `docType` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+==============================================================
+
+CREATE TABLE `closure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT NULL,
+  `child_id` int(11) DEFAULT NULL,
+  `depth` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1
+
+=============================================================
