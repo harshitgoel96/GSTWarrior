@@ -8,7 +8,7 @@ if(!$link)
 //echo "select n.id,n.display_name node_keeper n where n.parent_id=".$_REQUEST['docId'];
 
 
-$result=mysqli_query($link,"select n.id,n.display_name from node_keeper n where n.parent_id=".$_REQUEST['docId']);
+$result=mysqli_query($link,"select n.id,n.display_name,n.docType as file_type from node_keeper n LEFT OUTER JOIN file_keeper f on n.id=f.id where n.parent_id=".$_REQUEST['docId']);
 
 if(!$result)
 {

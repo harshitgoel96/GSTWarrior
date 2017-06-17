@@ -4,3 +4,6 @@ input:valid {
 input:invalid {
   color: red;
 }
+.fa-10x{
+		font-size:10em;
+}

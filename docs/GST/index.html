@@ -1,17 +1,66 @@
 <head>
-<script
-  src="https://code.jquery.com/jquery-1.12.4.js"
-  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-  crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+	<script  src="js/jquery-1.12.4.min.js" ></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.css"  rel="stylesheet" >
+  <script src="js/jstree.js"> </script>
+  <link rel="stylesheet" href="jstree/themes/default/style.min.css"  rel="stylesheet" >
+  <link href="css/font-awesome.min.css" rel="stylesheet" >
   <script src="js/treeRender.js"> </script>
   <link rel="stylesheet" href="css/gst-styles.css" />
 </head>
 <body>
 <div >
+<!-- Start div for download and preview modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="filePreviewModal" id="filePreviewModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">File Preview</h4>
+	  </div>
+	  <div class="modal-body">
+		<i id="fileLoader" class="fa fa-cog fa-spin fa-10x fa-fw margin-bottom"></i>
+		<a id="downloadButton" > <i class="fa fa-download fa-2x"></i>&nbsp;<span class="fileNameHolder"></span> </a>
+			
+			<div style="padding:10px">
+			<iframe id="previewFrame" style="width:90%;height:85%"></iframe>
+			</div>
+	  </div>
+	   <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+    </div>
+  </div>
+</div>
+
+<!--                                                     
+
+Two modal for preview and without preview
+-->
+
+<div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="noPreviewModal" id="FileDownloadNoPreview">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Download File</h4>
+      </div>
+      <div class="modal-body form-group">
+	  <i id="fileLoaderNoPreview" class="fa fa-cog fa-spin fa-10x fa-fw margin-bottom"></i>
+			<a id="downloadButtonNoPreview" > <i class="fa fa-download fa-10x"></i> &nbsp;<span class="fileNameHolder"></span></a>
+	  </div>
+      <div class="modal-footer">
+	  
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- end modal-->
 <div class="row">
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="AddFolderModal">
   <div class="modal-dialog modal-sm" role="document">
@@ -32,6 +81,29 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabelForFile" id="UploadFileModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upload File</h4>
+      </div>
+      <div class="modal-body form-group">
+	  <form id="fileForm">
+       <input type="file"  id="FileInput">
+      </form>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary submit-file-upload" disabled="true" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Uploading File">Upload File</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class='col-md-4'>
 <div id="treePlace" ></div>
 </div>
@@ -41,7 +113,7 @@
 <span class="glyphicon glyphicon-home" style="color:blue">&nbsp;</span><span id='pathPlace'>/root</span></div>
 <div class="col-md-4 add-button-grp" role="group">
 		<button type="button" class="btn btn-primary add-folder-button"  data-toggle="modal" data-target="#AddFolderModal"><i class="glyphicon glyphicon-folder-close"></i>&nbsp;Add Folder</button>
-		<button type="button" class="btn btn-primary add-file-button"><i class="glyphicon glyphicon-upload"></i>&nbsp;Add File</button>
+		<button type="button" class="btn btn-primary add-file-button"  data-toggle="modal" data-target="#UploadFileModal"><i class="glyphicon glyphicon-upload"></i>&nbsp;Add File</button>
 </div>
 </div>
 <div class="row " id="listPlace">

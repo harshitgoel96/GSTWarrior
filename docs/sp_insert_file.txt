@@ -1,0 +1,34 @@
+DELIMITER //
+CREATE PROCEDURE insert_file (IN in_display_name varchar(255),IN in_parent_id int(11), IN in_file_blob longtext, IN in_File_Type varchar(20))
+
+BEGIN
+declare in_child int(11);
+declare in_path varchar(700);
+
+    insert into node_keeper (display_name,parent_id,docType) values (in_display_name ,in_parent_id,in_File_Type);
+
+	SELECT LAST_INSERT_ID() into in_child;
+
+	insert into closure(parent_id, child_id, depth) values (in_child,in_child,0);
+
+	insert into closure(parent_id, child_id, depth)
+		select p.parent_id, c.child_id, p.depth+c.depth+1
+		from closure p, closure c
+		where p.child_id=in_parent_id and c.parent_id=in_child;
+ 
+ 
+ 
+	select group_concat(n.display_name order by n.id separator '/')
+		into in_path
+		from closure d
+		join closure a on (a.child_id=d.child_id)
+		join node_keeper n on (n.id=a.parent_id)
+		where d.parent_id=1 and d.child_id!=d.parent_id and d.child_id=in_child
+		group by d.child_id;
+ 
+	update node_keeper set path=in_path where id=in_child;
+ 
+ insert into file_keeper(id,file_type,file_blob) values(in_child,in_File_Type,in_file_blob);
+ 
+END //
+DELIMITER ;
